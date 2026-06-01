@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammond Hauls — Premium Property Removal & Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest: #1c2e22;
+    --forest-mid: #2a4233;
+    --forest-light: #3a5c47;
+    --sage: #7a9e87;
+    --sage-light: #a8c4b0;
+    --silver: #b8bfba;
+    --silver-light: #d4d9d5;
+    --stone: #f4f1ec;
+    --stone-dark: #e5e0d8;
+    --white: #ffffff;
+    --text-dark: #1a2420;
+    --text-mid: #4a5e52;
+    --text-light: #7a8e82;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--white); color: var(--text-dark); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(28, 46, 34, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(184,191,186,0.15);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--white); letter-spacing: 0.04em; text-decoration: none; }
+  .nav-logo em { font-style: italic; color: var(--sage-light); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--sage-light); }
+  .nav-cta { background: transparent !important; color: var(--sage-light) !important; border: 1px solid rgba(168,196,176,0.4) !important; padding: 0.55rem 1.3rem; border-radius: 1px; font-weight: 500 !important; transition: all 0.2s !important; }
+  .nav-cta:hover { background: rgba(168,196,176,0.1) !important; border-color: var(--sage-light) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--forest);
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    padding: 10rem 10% 6rem; position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; width: 42%;
+    background: linear-gradient(135deg, var(--forest-mid) 0%, var(--forest-light) 100%);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 620px; }
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--sage-light); margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--sage); }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 400;
+    color: var(--white); line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--sage-light); }
+  .hero-tagline { font-size: 1.05rem; color: rgba(255,255,255,0.5); max-width: 480px; margin-bottom: 3rem; font-weight: 300; line-height: 1.8; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--sage-light); color: var(--forest);
+    padding: 1rem 2.5rem; border-radius: 1px;
+    font-size: 0.8rem; font-weight: 500; text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.2s;
+    border: 1px solid var(--sage-light);
+  }
+  .btn-primary:hover { background: var(--white); border-color: var(--white); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.8);
+    padding: 1rem 2.5rem; border-radius: 1px;
+    font-size: 0.8rem; font-weight: 400; text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); color: var(--white); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--stone); padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 3.5rem; flex-wrap: wrap;
+    border-bottom: 1px solid var(--stone-dark);
+  }
+  .trust-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; font-weight: 500; color: var(--text-mid); letter-spacing: 0.1em; text-transform: uppercase; }
+  .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--text-dark); line-height: 1.2; margin-bottom: 1.25rem; }
+  .section-sub { font-size: 1rem; color: var(--text-mid); max-width: 520px; font-weight: 300; line-height: 1.8; margin-bottom: 3rem; }
+
+  /* SERVICES */
+  .services-bg { background: var(--stone); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--stone-dark); border: 1px solid var(--stone-dark); }
+  .service-card { background: var(--white); padding: 2.5rem; transition: background 0.3s, transform 0.2s; }
+  .service-card:hover { background: var(--forest); }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.08); }
+  .service-card:hover .service-name { color: var(--white); }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.55); }
+  .service-card:hover .service-price { color: var(--sage-light); }
+  .service-num { font-family: var(--serif); font-size: 2.5rem; color: var(--stone-dark); line-height: 1; margin-bottom: 1.25rem; transition: color 0.3s; }
+  .service-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; color: var(--text-dark); margin-bottom: 0.75rem; transition: color 0.3s; }
+  .service-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 300; transition: color 0.3s; }
+  .service-price { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); transition: color 0.3s; }
+
+  /* WHY */
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; border: 1px solid var(--stone-dark); }
+  .why-card { padding: 2.25rem; border-right: 1px solid var(--stone-dark); border-bottom: 1px solid var(--stone-dark); }
+  .why-card:hover { background: var(--stone); }
+  .why-icon { width: 36px; height: 2px; background: var(--sage); margin-bottom: 1.25rem; }
+  .why-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text-dark); }
+  .why-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.75; font-weight: 300; }
+
+  /* PRICING */
+  .price-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+  .price-table thead tr { border-bottom: 1px solid var(--forest); }
+  .price-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-light); }
+  .price-table td { padding: 1.1rem 1rem; border-bottom: 1px solid var(--stone-dark); color: var(--text-dark); font-size: 0.92rem; }
+  .price-table tr:hover td { background: var(--stone); }
+  .price-table td:last-child { font-family: var(--serif); font-size: 1.1rem; }
+  .price-custom { font-size: 0.78rem !important; color: var(--sage) !important; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--sans) !important; }
+
+  /* TARGET */
+  .target-bg { background: var(--forest); }
+  .target-bg .section-title { color: var(--white); }
+  .target-bg .section-sub { color: rgba(255,255,255,0.45); }
+  .target-bg .section-label { color: var(--sage-light); }
+  .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); margin-top: 3rem; }
+  .target-card { background: var(--forest-mid); padding: 2rem 1.75rem; border: none; transition: background 0.25s; }
+  .target-card:hover { background: var(--forest-light); }
+  .target-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
+  .target-line { width: 24px; height: 1px; background: var(--sage); margin-bottom: 0.75rem; }
+  .target-desc { font-size: 0.83rem; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+
+  /* QUOTE */
+  .quote-bg { background: var(--stone); }
+  .quote-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .quote-benefits { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .quote-benefit { display: flex; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: var(--text-mid); font-weight: 300; }
+  .check { width: 18px; height: 18px; border: 1px solid var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check svg { width: 9px; height: 9px; stroke: var(--sage); fill: none; }
+  .form-panel { background: var(--white); padding: 2.5rem; border: 1px solid var(--stone-dark); }
+  .form-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; margin-bottom: 1.75rem; color: var(--text-dark); }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.4rem; }
+  .form-group select,
+  .form-group input,
+  .form-group textarea {
+    width: 100%; padding: 0.7rem 0.9rem;
+    border: 1px solid var(--stone-dark); border-radius: 1px;
+    font-family: var(--sans); font-size: 0.88rem; color: var(--text-dark);
+    background: var(--stone); outline: none; transition: border-color 0.2s; appearance: none;
+  }
+  .form-group select:focus,
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--sage); background: var(--white); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .estimate-box { background: var(--forest); padding: 1.25rem; margin-bottom: 1.25rem; display: none; }
+  .estimate-box.show { display: block; }
+  .estimate-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 0.25rem; }
+  .estimate-range { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; color: var(--white); }
+  .form-submit {
+    width: 100%; padding: 1rem; background: var(--forest); color: var(--white);
+    border: none; border-radius: 1px; font-family: var(--sans);
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--forest-light); }
+
+  /* FOOTER */
+  footer { background: var(--forest); color: rgba(255,255,255,0.4); padding: 4rem 2rem 2.5rem; text-align: center; }
+  .footer-logo { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem; display: block; }
+  .footer-logo em { font-style: italic; color: var(--sage-light); }
+  .footer-tagline { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 1.75rem; }
+  .footer-contact { font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .footer-contact a { color: var(--sage-light); text-decoration: none; }
+  .footer-areas { font-size: 0.75rem; color: rgba(255,255,255,0.2); margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); line-height: 2; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-tagline { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-btns { animation: fadeUp 0.7s 0.3s ease both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .hero::after { display: none; }
+    .trust-bar { gap: 1.5rem; padding: 1.75rem; }
+    .quote-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Hammond <em>Hauls</em></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#quote" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Property Removal & Services</p>
+    <h1>The heavy lifting,<br><em>handled completely.</em></h1>
+    <p class="hero-tagline">From single-item pickups to full-property cleanouts, Hammond Hauls delivers a professional, stress-free experience — so you don't have to think twice.</p>
+    <div class="hero-btns">
+      <a href="#quote" class="btn-primary">Get Instant Quote</a>
+      <a href="tel:+14782974448" class="btn-outline">Call (478) 297-4448</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div>Uniformed Crews</div>
+  <div class="trust-item"><div class="trust-dot"></div>Fully Insured</div>
+  <div class="trust-item"><div class="trust-dot"></div>Text Notifications</div>
+  <div class="trust-item"><div class="trust-dot"></div>Cleanup Included</div>
+  <div class="trust-item"><div class="trust-dot"></div>No Curbside Required</div>
+  <div class="trust-item"><div class="trust-dot"></div>Professional Invoicing</div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services-bg">
+  <div class="container">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Every job handled<br>with care and precision.</h2>
+    <p class="section-sub">We remove items from wherever they sit — basement, attic, garage, or third floor. No prep work needed from you.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-name">Item Removal</div>
+        <p class="service-desc">Furniture, appliances, mattresses, and more — removed from anywhere on your property. No staging, no hassle.</p>
+        <div class="service-price">Starting at $125</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-name">Estate Cleanouts</div>
+        <p class="service-desc">Respectful, thorough, and professionally handled. Full-property estate cleanouts with proper documentation and invoicing.</p>
+        <div class="service-price">Custom Quote · Avg. $1,500–$5,000</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-name">Garage & Attic Cleanouts</div>
+        <p class="service-desc">Years of accumulation cleared in a single visit. We haul, sweep, and leave the space ready for what comes next.</p>
+        <div class="service-price">Starting at $350</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-name">Material Delivery</div>
+        <p class="service-desc">Rock, gravel, mulch, topsoil, and more — delivered and placed exactly where you need it. No trailer rental, no hassle.</p>
+        <div class="service-price">Custom Quote</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-name">Property Refresh</div>
+        <p class="service-desc">Preparing to list? We remove junk, haul debris, clear brush, and clean garages — turning a cluttered property into a show-ready one.</p>
+        <div class="service-price">Custom Quote</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-name">Basement Cleanouts</div>
+        <p class="service-desc">Full basement clearances handled top to bottom. Everything removed, swept down, and left clean.</p>
+        <div class="service-price">Starting at $350</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label">Transparent Pricing</p>
+    <h2 class="section-title">Professional quality,<br>no surprises.</h2>
+    <p class="section-sub">Our rates reflect the care and professionalism you can expect on every job. No hidden fees, no pressure.</p>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Details</th>
+          <th>Starting Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Single Item Removal</td><td>Chairs, small furniture, boxes</td><td>$125</td></tr>
+        <tr><td>Sofa / Sectional</td><td>Any size, from any room</td><td>$175</td></tr>
+        <tr><td>Appliance Removal</td><td>Fridge, washer, dryer, stove</td><td>$175</td></tr>
+        <tr><td>Mattress Removal</td><td>Any size</td><td>$125</td></tr>
+        <tr><td>Garage / Attic Cleanout</td><td>Full removal and sweep</td><td>$350</td></tr>
+        <tr><td>Basement Cleanout</td><td>Full removal and sweep</td><td>$350</td></tr>
+        <tr><td>Material Delivery</td><td>Rock, gravel, mulch, topsoil</td><td class="price-custom">Custom Quote</td></tr>
+        <tr><td>Estate Cleanout</td><td>Full property</td><td class="price-custom">Custom Quote</td></tr>
+        <tr><td>Property Refresh</td><td>Pre-listing debris removal</td><td class="price-custom">Custom Quote</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <p class="section-label">The Difference</p>
+    <h2 class="section-title">You're not hiring haulers.<br>You're hiring professionals.</h2>
+    <p class="section-sub">Every detail of how we work is designed to make you confident — before, during, and after the job.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Removed From Anywhere</div>
+        <p class="why-desc">We go to the item — basement, attic, upstairs bedroom. No curbside staging, no prep work required from you.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Clear Communication</div>
+        <p class="why-desc">Confirmations, arrival windows, and completion texts. You always know exactly what's happening and when.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Fully Insured</div>
+        <p class="why-desc">Every job is fully covered. Peace of mind for homeowners, realtors, and property managers alike.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Clean Finish Every Time</div>
+        <p class="why-desc">We sweep and tidy before we leave. No debris, no dust — just a clean, empty space.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Uniformed, Professional Crew</div>
+        <p class="why-desc">Our team arrives in uniform, on time, and ready to work. No guesswork about who's showing up.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"></div>
+        <div class="why-title">Professional Invoicing</div>
+        <p class="why-desc">Itemized invoices for every job — easy to expense or share with estate attorneys and property managers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="target-bg">
+  <div class="container">
+    <p class="section-label">Who We Serve</p>
+    <h2 class="section-title">Built for clients who value<br>time over savings.</h2>
+    <p class="section-sub">We're not the cheapest option — and that's intentional. Our clients pay for reliability, professionalism, and results.</p>
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="target-line"></div>
+        <div class="target-name">Homeowners</div>
+        <p class="target-desc">Busy professionals and empty nesters who want the job done right without lifting a finger.</p>
+      </div>
+      <div class="target-card">
+        <div class="target-line"></div>
+        <div class="target-name">Realtors</div>
+        <p class="target-desc">We get properties show-ready fast. Reliable enough to recommend to every client, every time.</p>
+      </div>
+      <div class="target-card">
+        <div class="target-line"></div>
+        <div class="target-name">Estate Attorneys</div>
+        <p class="target-desc">Respectful, discreet estate cleanouts with proper documentation and professional invoicing.</p>
+      </div>
+      <div class="target-card">
+        <div class="target-line"></div>
+        <div class="target-name">Property Managers</div>
+        <p class="target-desc">Fast turnaround between tenants. We handle the mess so you can focus on the next lease.</p>
+      </div>
+      <div class="target-card">
+        <div class="target-line"></div>
+        <div class="target-name">Families Moving</div>
+        <p class="target-desc">Moving is stressful enough. We handle the items you're not taking — cleanly and efficiently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section id="quote" class="quote-bg">
+  <div class="container">
+    <div class="quote-wrap">
+      <div class="quote-intro">
+        <p class="section-label">Get a Quote</p>
+        <h2 class="section-title">Instant estimates.<br>Same-day availability.</h2>
+        <p class="section-sub">Tell us what you need removed and get an estimated price range immediately. No commitment required.</p>
+        <div class="quote-benefits">
+          <div class="quote-benefit"><div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Instant estimated price range</div>
+          <div class="quote-benefit"><div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Same-day and next-day slots available</div>
+          <div class="quote-benefit"><div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Serving Alpharetta, Roswell, Milton & Johns Creek</div>
+          <div class="quote-benefit"><div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>No obligation — just an honest estimate</div>
+        </div>
+      </div>
+      <div class="form-panel">
+        <div class="form-title">What do you need removed?</div>
+        <div class="form-group">
+          <label>Item Type</label>
+          <select id="item-type" onchange="calculateEstimate()">
+            <option value="">Select an item...</option>
+            <option value="125">Single Item (chair, box, etc.)</option>
+            <option value="175">Sofa / Sectional</option>
+            <option value="175">Appliance (fridge, washer, dryer)</option>
+            <option value="125">Mattress</option>
+            <option value="350">Garage Cleanout</option>
+            <option value="350">Basement / Attic Cleanout</option>
+            <option value="0">Material Delivery (rock, gravel, mulch)</option>
+            <option value="0">Estate Cleanout (custom)</option>
+            <option value="0">Property Refresh (custom)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>How many items?</label>
+            <select id="qty" onchange="calculateEstimate()">
+              <option value="1">1 item</option>
+              <option value="2">2 items</option>
+              <option value="3">3 items</option>
+              <option value="4">4+ items</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Stairs involved?</label>
+            <select id="stairs" onchange="calculateEstimate()">
+              <option value="0">No stairs</option>
+              <option value="25">Yes — add $25/item</option>
+            </select>
+          </div>
+        </div>
+        <div class="estimate-box" id="estimate-box">
+          <div class="estimate-label">Estimated Range</div>
+          <div class="estimate-range" id="estimate-range">$175 – $225</div>
+        </div>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="Your phone number">
+          </div>
+          <div class="form-group">
+            <label>Zip Code</label>
+            <input type="text" placeholder="30009">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Additional Notes (optional)</label>
+          <textarea rows="3" placeholder="Describe the items or any special circumstances..."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Request My Quote →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Hammond <em>Hauls</em></span>
+  <p class="footer-tagline">Premium Property Removal & Services</p>
+  <p class="footer-contact"><a href="tel:+14782974448">(478) 297-4448</a></p>
+  <p class="footer-contact"><a href="mailto:info@hammondhauls.com">info@hammondhauls.com</a></p>
+  <p class="footer-areas">Proudly serving Alpharetta · Roswell · Milton · Johns Creek · and surrounding North Atlanta communities<br><br>© 2026 Hammond Hauls. All rights reserved.</p>
+</footer>
+
+<script>
+function calculateEstimate() {
+  const item = document.getElementById('item-type');
+  const qty = parseInt(document.getElementById('qty').value);
+  const stairs = parseInt(document.getElementById('stairs').value);
+  const box = document.getElementById('estimate-box');
+  const range = document.getElementById('estimate-range');
+  const base = parseInt(item.value);
+  if (!item.value || base === 0) { box.classList.remove('show'); return; }
+  const low = (base * qty) + (stairs * qty);
+  const high = Math.round(low * 1.25);
+  range.textContent = '$' + low.toLocaleString() + ' – $' + high.toLocaleString();
+  box.classList.add('show');
+}
+function submitForm() {
+  alert('Thanks! A member of the Hammond Hauls team will reach out within 1 hour to confirm your quote and schedule.');
+}
+</script>
+</body>
+</html>
