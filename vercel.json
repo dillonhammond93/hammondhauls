@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "hammondhauls.com" }],
+      "destination": "https://www.hammondhauls.com/$1",
+      "permanent": true
+    }
+  ]
+}
